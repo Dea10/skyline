@@ -25,26 +25,31 @@ public class Main {
 
         do {
             int[] building = new int[3];
-            System.out.println("Edificio: " + i);
-            System.out.print("Introduzca Li: ");
-            building[0] = scanner.nextInt();    //Li
-            System.out.print("Introduzca Ri: ");
-            building[1] = scanner.nextInt();    //Ri
-            System.out.print("Introduzca Hi: ");
-            building[2] = scanner.nextInt();    //Hi
 
-            scanner.nextLine();
-            if(validateBuilding(building)) {
-                buildings.add(building);
-                System.out.println("... Edificio añadido");
-                i++;
-            } else {
-                System.out.println("Edificio no añadido, por favor revise que: ");
-                System.out.println("\tLi, Ri, Hi deben ser enteros");
-                System.out.println("\tLi, Ri, Hi deben ser mayores a 0");
-                System.out.println("\tLi < Ri");
+            try {
+                System.out.println("Edificio: " + i);
+                System.out.print("Introduzca Li: ");
+                building[0] = scanner.nextInt();    //Li
+                System.out.print("Introduzca Ri: ");
+                building[1] = scanner.nextInt();    //Ri
+                System.out.print("Introduzca Hi: ");
+                building[2] = scanner.nextInt();    //Hi
+
+                if(validateBuilding(building)) {
+                    buildings.add(building);
+                    System.out.println("... Edificio añadido");
+                    i++;
+                } else {
+                    System.out.println("Edificio no añadido, por favor revise que: ");
+                    System.out.println("\tLi, Ri, Hi deben ser enteros");
+                    System.out.println("\tLi, Ri, Hi deben ser mayores a 0");
+                    System.out.println("\tLi < Ri");
+                }
+            }catch (Exception e) {
+                System.out.println("Dato inválido, edificio no añadido");
             }
 
+            scanner.nextLine();
             System.out.print("Agregar otro edificio [s/n]?: ");
 
             if(scanner.nextLine().toLowerCase().equals("n")) {
