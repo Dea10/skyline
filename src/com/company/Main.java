@@ -4,11 +4,61 @@ import java.util.*;
 
 public class Main {
 
-    public static List<int[]> getSkyline(int[][] buildings) {
+    public static void main(String[] args) {
+        ArrayList<int[]> buildings = new ArrayList<>();
+
+        buildings = drawMenu();
+        //int[][] buildings = {{2,9,10},{3,6,15},{5,12,12},{13,16,10}, {15,17,4}};
+
+        List<int[]> skylineDrawingList;
+        skylineDrawingList = getSkyline(buildings);
+
+        skylineDrawingList.forEach(arr -> System.out.println(Arrays.toString(arr)));
+    }
+
+    public static ArrayList<int[]> drawMenu() {
+        int i = 0;
+        boolean continueAdding = true;
+        ArrayList<int[]> buildings = new ArrayList<>();
+
+        Scanner scanner = new Scanner(System.in);
+
+        do {
+            int[] building = new int[3];
+            System.out.println("Edificio: " + i);
+            System.out.print("Introduzca Li: ");
+            building[0] = scanner.nextInt();    //Li
+            System.out.print("Introduzca Ri: ");
+            building[1] = scanner.nextInt();    //Ri
+            System.out.print("Introduzca Hi: ");
+            building[2] = scanner.nextInt();    //Hi
+
+            scanner.nextLine();
+            buildings.add(building);
+
+            System.out.print("Agregar otro edificio [s/n]?: ");
+
+            if(scanner.nextLine().toLowerCase().equals("n")) {
+                continueAdding = false;
+            }
+            i++;
+        }while(continueAdding);
+
+        return buildings;
+    }
+
+    public static boolean buildingValidation(int[] building) {
+        //Validations:
+        //  Li, Ri, Hi must be int's
+        //  Li, Ri, Hi > 0
+        //  Li < Ri
+        return true;
+    }
+
+    public static List<int[]> getSkyline(ArrayList<int[]> buildings) {
         List<int[]> result = new ArrayList<int[]>();
 
-        if (buildings == null || buildings.length == 0
-                || buildings[0].length == 0) {
+        if (buildings == null || buildings.size() == 0 || buildings.get(0).length == 0) {
             return result;
         }
 
@@ -59,15 +109,6 @@ public class Main {
         }
 
         return result;
-    }
-
-    public static void main(String[] args) {
-
-        int[][] buildings = {{2,9,10},{3,6,15},{5,12,12},{13,16,10}, {15,17,4}}; //entrada de datos en formato
-        List<int[]> sd;
-        sd = getSkyline(buildings);
-
-        sd.forEach(arr -> System.out.println(Arrays.toString(arr)));
     }
 }
 
