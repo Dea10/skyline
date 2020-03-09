@@ -34,24 +34,42 @@ public class Main {
             building[2] = scanner.nextInt();    //Hi
 
             scanner.nextLine();
-            buildings.add(building);
+            if(validateBuilding(building)) {
+                buildings.add(building);
+                System.out.println("... Edificio añadido");
+                i++;
+            } else {
+                System.out.println("Edificio no añadido, por favor revise que: ");
+                System.out.println("\tLi, Ri, Hi deben ser enteros");
+                System.out.println("\tLi, Ri, Hi deben ser mayores a 0");
+                System.out.println("\tLi < Ri");
+            }
 
             System.out.print("Agregar otro edificio [s/n]?: ");
 
             if(scanner.nextLine().toLowerCase().equals("n")) {
                 continueAdding = false;
             }
-            i++;
         }while(continueAdding);
 
         return buildings;
     }
 
-    public static boolean buildingValidation(int[] building) {
+    public static boolean validateBuilding(int[] building) {
         //Validations:
-        //  Li, Ri, Hi must be int's
-        //  Li, Ri, Hi > 0
+        //  Ri, Hi > 0
         //  Li < Ri
+
+        for(int i = 1; i < 3; i++) {
+            if(building[i] <= 0) {  //Ri, Hi > 0
+                return false;
+            }
+        }
+
+        if (building[0] >= building[1]) {
+            return false;
+        }
+
         return true;
     }
 
